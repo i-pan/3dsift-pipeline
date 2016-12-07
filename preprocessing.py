@@ -36,10 +36,11 @@ def convert_to_nii(list_of_dirs, parent_dir, out_dir, correct_tilt=True):
             continue
         min_length = min(ls_output, key=len)
         max_length = max(ls_output, key=len)
-        if correct_tilt: 
-            os.system("rm " + temp_out + "/" + min_length)
-        else: 
-            os.system("rm " + temp_out + "/" + max_length)
+        if len(ls_output) > 1:
+            if correct_tilt: 
+                os.system("rm " + temp_out + "/" + min_length)
+            else: 
+                os.system("rm " + temp_out + "/" + max_length)
     
     for e in exceptions:
         print(e + " has more than 2 files. Please check and delete extraneous files manually.\n")
