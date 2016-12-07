@@ -19,9 +19,11 @@ def convert_to_nii(list_of_dirs, parent_dir, out_dir, correct_tilt=True):
     with open(list_of_dirs, "r") as f:
         files = f.readlines() 
 
-    files = files.strip()
+    files = [i.strip() for i in files]
+    if os.path.exists(out_dir) is False:
+        os.system("mkdir " + out_dir)
     for i in files: 
-        temp_out = out_dir + "/" +  i 
+        temp_out = out_dir + "/" +  i
         if os.path.exists(temp_out) is False:
             os.system("mkdir " + temp_out)
         command = "dcm2niix -o " + temp_out + " - m y " + parent_dir + i 
