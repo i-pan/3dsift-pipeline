@@ -2,7 +2,7 @@ import os
 import subprocess 
 import datetime
 
-def convert_to_nii(list_of_dirs, out_dir, correct_tilt=True):
+def convert_to_nii(list_of_dirs, parent_dir, out_dir, correct_tilt=True):
     # list_of_dirs should be a file with the names of directories containing
     # DICOM files that you want to convert, all directories should be in 
     # the same parent directory
