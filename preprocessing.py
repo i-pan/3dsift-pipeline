@@ -54,6 +54,8 @@ def extract_3dsift_feat(nii_path, out_dir, mac=True):
     # mac argument is for whether you're using macOS
     
     start_time = datetime.datetime.now()
+    if os.path.exists(out_dir) is False: 
+        os.system("mkdir " + out_dir) 
     files = subprocess.check_output("ls " + nii_path, shell=True)
     files = files.split() 
     if mac: ext = ".mac"
@@ -61,5 +63,6 @@ def extract_3dsift_feat(nii_path, out_dir, mac=True):
     for i in files: 
         command = "featExtract" + ext + " -qto_xyz " + nii_path + "/" + i + "/*.nii"
         command += " " + out_dir + "/" + i + ".key"
+        os.system(command)
     print("DONE!")
     print("Extracted 3D-SIFT features from " + str(len(files)) + " images in: " + str(datetime.datetime.now() - start_time))
