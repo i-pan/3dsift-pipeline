@@ -26,7 +26,7 @@ def convert_to_nii(list_of_dirs, parent_dir, out_dir, correct_tilt=True):
         temp_out = out_dir + "/" +  i
         if os.path.exists(temp_out) is False:
             os.system("mkdir " + temp_out)
-        command = "dcm2niix -o " + temp_out + " - m y " + parent_dir + "/" + i 
+        command = "dcm2niix -o " + temp_out + "- m y " + parent_dir + "/" + i 
         os.system(command+"/")
         ls_output = subprocess.check_output("ls " + temp_out, shell=True) 
         ls_output = ls_output.split() 
@@ -44,7 +44,7 @@ def convert_to_nii(list_of_dirs, parent_dir, out_dir, correct_tilt=True):
     for e in exceptions:
         print(e + " has more than 2 files. Please check and delete extraneous files manually.\n")
     print("DONE!")
-    print("Converted " + len(files) + " files in: " + str(datetime.datetime.now() - start_time))
+    print("Converted " + str(len(files)) + " files in: " + str(datetime.datetime.now() - start_time))
      
 def extract_3dsift_feat(nii_path, out_dir, mac=True):
     # nii_path should just be the out_dir specified in convert_to_nii
@@ -61,4 +61,4 @@ def extract_3dsift_feat(nii_path, out_dir, mac=True):
         command = "featExtract" + ext + " -qto_xyz " + nii_path + "/" + i + "/*.nii"
         command += " " + out_dir + "/" + i + ".key"
     print("DONE!")
-    print("Extracted 3D-SIFT features from " + len(files) + " images in: " + str(datetime.datetime.now() - start_time))
+    print("Extracted 3D-SIFT features from " + str(len(files)) + " images in: " + str(datetime.datetime.now() - start_time))
