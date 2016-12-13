@@ -26,7 +26,7 @@ def convert_to_nii(list_of_dirs, parent_dir, out_dir, correct_tilt=True):
         temp_out = out_dir + "/" +  i
         if os.path.exists(temp_out) is False:
             os.system("mkdir " + temp_out)
-        command = "dcm2niix -o " + temp_out + "- m y " + parent_dir + "/" + i 
+        command = "dcm2niix -o " + temp_out + " -m y " + parent_dir + "/" + i 
         os.system(command+"/")
         ls_output = subprocess.check_output("ls " + temp_out, shell=True) 
         ls_output = ls_output.split() 
