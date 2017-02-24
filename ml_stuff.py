@@ -112,7 +112,7 @@ def generate_models(clf_library):
     return clf_list
 
 def machine_learner(X,y, clf_library, n_folds, pkl='pickles', verbose=False,
-                    thresholds=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]): 
+                    thresholds=np.linspace(0.05,0.95,19)): 
     """
     This function trains models using K-fold cross-validation. 
     Outputs models + metrics.
@@ -177,8 +177,8 @@ def kfold_cv(X,y, clf, n_folds, pkl, thresholds, i):
 
         if clf_name == 'SVC':
             scores = clf.decision_function(X_test)
-            thresholds = np.linspace(min(scores),max(scores),11)[1:-1]
-            thresholds = np.append(thresholds, 0)
+            def sigmoid(x): return 1/(1+np.exp(-x))
+            scores = sigmoid(scores)
         else:
             scores = clf.predict_proba(X_test)[:,1] 
 
