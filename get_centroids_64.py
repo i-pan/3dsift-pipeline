@@ -2,9 +2,15 @@ import ml_stuff
 import pandas as pd 
 import subprocess
 
-labels_file = "/users/ipan/scratch/ml_code/ProTECTIII_Labels_v2.csv"
+# these already exist
+labels_file = "/users/ipan/scratch/ml_code/ProTECTIII_Labels_v2.csv" # path to file containing labels 
+# note that this script is written as if labels_file has 2 columns:
+## id: must match corresponding key file names i.e., 100.key corresponds to id = 100
+## pos_OR: label [1/0] for that case
+keys_dir = "/users/ipan/scratch/ml_code/neg_tilt/keys/" # directory where keys are located
+
+# these will be written out
 train_test_split_out = "/users/ipan/scratch/ml_code/neg_tilt/train_test_split.csv"
-keys_dir = "/users/ipan/scratch/ml_code/neg_tilt/keys/"
 pkl_file = "/users/ipan/scratch/ml_code/neg_tilt/km-pickles/mbkm_64_1.pkl"
 centroids_csv_file = "/users/ipan/scratch/ml_code/neg_tilt/km-centroids/mbkm_64_1.csv"
 
