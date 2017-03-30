@@ -27,7 +27,7 @@ function []=feature_encoding(arg1, arg2, arg3, arg4, arg5)
         end
         dlmwrite(arg5, vlad_enc, ',');
     elseif strcmp(arg2, 'bow')
-        bow_enc = zeros(0,length(centroids)+1);
+        bow_enc = zeros(0,size(centroids,1)+1);
         for i = 1:length(files)
             myfile = char(strcat(arg4, '/', files(i)));
             tempdat = dlmread(myfile, '\t', 6, 0);            
