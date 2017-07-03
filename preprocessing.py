@@ -47,7 +47,7 @@ def convert_to_nii(list_of_dirs, parent_dir, out_dir, correct_tilt=True):
     print("DONE!")
     print("Converted " + str(len(files)) + " files in: " + str(datetime.datetime.now() - start_time))
      
-def extract_3dsift_feat(nii_path, out_dir, list_of_dirs=False, mac=True):
+def extract_3dsift_feat(nii_path, out_dir, list_of_dirs=False, mac=True, deepmedic=False):
     # nii_path should just be the out_dir specified in convert_to_nii
     # out_dir should be the desired output directory for all the .key files
     # make sure featExtract is in path 
@@ -68,8 +68,11 @@ def extract_3dsift_feat(nii_path, out_dir, list_of_dirs=False, mac=True):
         files = files.split()
     if mac: ext = ".mac"
     else: ext = ".ubu"
-    for i in files: 
-        command = "featExtract" + ext + " -qto_xyz " + nii_path + "/" + i + "/*.nii"
+    for i in files:
+	if deepmedic:
+	    command = "featExtract{} -qto_xyz {}/{}_deepmedic.nii".format(ext,nii_path,i) 
+	else:
+            command = "featExtract" + ext + " -qto_xyz " + nii_path + "/" + i + "/*.nii"
         command += " " + out_dir + "/" + i + ".key"
         os.system(command)
     print("DONE!")
