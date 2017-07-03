@@ -70,7 +70,7 @@ def extract_3dsift_feat(nii_path, out_dir, list_of_dirs=False, mac=True, deepmed
     else: ext = ".ubu"
     for i in files:
 	if deepmedic:
-	    command = "featExtract{} -qto_xyz {}/{}_deepmedic.nii".format(ext,nii_path,i) 
+	    command = "featExtract{} -qto_xyz {}/{}".format(ext,nii_path,i) 
 	else:
             command = "featExtract" + ext + " -qto_xyz " + nii_path + "/" + i + "/*.nii"
         command += " " + out_dir + "/" + i + ".key"
